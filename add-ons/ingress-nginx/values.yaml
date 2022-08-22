@@ -1,11 +1,28 @@
 ingress-nginx:
   controller:
     service:
+      targetPorts:
+       http: http
+       https: http
       externalTrafficPolicy: "Local"
       annotations:
+        nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+        #nginx.ingress.kubernetes.io/ssl-redirect: "false"
+        #nginx.ingress.kubernetes.io/use-forwarded-headers: "false"
+        #nginx.ingress.kubernetes.io/preserve-trailing-slash: "true"
+        nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
         service.beta.kubernetes.io/aws-load-balancer-backend-protocol: tcp
         service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: true
         service.beta.kubernetes.io/aws-load-balancer-scheme: internet-facing
         service.beta.kubernetes.io/aws-load-balancer-type: nlb
+        service.beta.kubernetes.io/aws-load-balancer-ssl-cert: arn:aws:acm:eu-central-1:194527575284:certificate/b54adfb2-e5e0-4e58-97a2-853dbb015588
         service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: ip
         service.beta.kubernetes.io/aws-load-balancer-ssl-ports: https
+
+  defaultBackend:
+    enabled: true
+    name: default-backend
+    image:
+      repository: k8s.gcr.io/defaultbackend-amd64
+      tag: "1.5"
+      pullPolicy: IfNotPresent
