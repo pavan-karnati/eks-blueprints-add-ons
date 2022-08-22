@@ -1,7 +1,7 @@
 # Global Values
-repoUrl: 'https://github.com/aws-samples/eks-blueprints-add-ons.git'
+repoUrl: "https://github.com/pavan-karnati/eks-blueprints-add-ons.git"
 targetRevision: HEAD
-region: ''
+region: "eu-central-1"
 account: ''
 clusterName: ''
 destinationServer: ''
@@ -42,8 +42,8 @@ awsForFluentBit:
 
 # AWS Load Balancer Controller Values
 awsLoadBalancerController:
-  enable: false
-  createNamespace: true
+  enable: true
+  createNamespace: false
   serviceAccountName:
   podDisruptionBudget:
     maxUnavailable: 1
@@ -116,7 +116,7 @@ gatekeeper:
 
 # Nginx Values
 ingressNginx:
-  enable: false
+  enable: true
   createNamespace: true
 
 # Grafana default Values
